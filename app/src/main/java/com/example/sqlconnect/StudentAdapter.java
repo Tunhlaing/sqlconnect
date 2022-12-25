@@ -11,9 +11,9 @@ import androidx.recyclerview.widget.RecyclerView;
 import java.util.ArrayList;
 
 public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentViewHolder> {
-    private ArrayList<String> studentList;
+    private ArrayList<StudentModel> studentList;
 
-    public StudentAdapter(ArrayList<String> studentList) {
+    public StudentAdapter(ArrayList<StudentModel> studentList) {
         this.studentList = studentList;
     }
 
@@ -26,7 +26,11 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
     @Override
     public void onBindViewHolder(@NonNull StudentViewHolder holder, int position) {
-        holder.tvStudentName.setText(studentList.get(position));
+        holder.tvStudentName.setText(studentList.get(position).getStudentName());
+        holder.tvStudentGrade.setText(studentList.get(position).getStudentGrade());
+
+
+
 
     }
 
@@ -37,10 +41,14 @@ public class StudentAdapter extends RecyclerView.Adapter<StudentAdapter.StudentV
 
     public class StudentViewHolder extends RecyclerView.ViewHolder {
         TextView tvStudentName;
+        TextView tvStudentGrade;
+
+
 
         public StudentViewHolder(@NonNull View itemView) {
             super(itemView);
             tvStudentName = itemView.findViewById(R.id.tvStudentName);
+            tvStudentGrade = itemView.findViewById(R.id.tvStudentGrade);
         }
     }
 }

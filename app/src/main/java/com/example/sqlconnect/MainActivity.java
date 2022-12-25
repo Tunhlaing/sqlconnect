@@ -19,23 +19,18 @@ public class MainActivity extends AppCompatActivity {
     MyDataBase db;
     FloatingActionButton btAdd;
 
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main);
+        db = new MyDataBase(this);
         initView();
         setAdapter();
         handleClick();
-        db = new MyDataBase(this);
 
-        LinearLayoutManager linearLayoutManager = new LinearLayoutManager(this);
+        LinearLayoutManager studentAdapter = new LinearLayoutManager(this);
         //app:layoutManager="androidx.recyclerview.widget.LinearLayoutManager" in XML
-        rvStudent.setLayoutManager(linearLayoutManager);
-
-
-
+        rvStudent.setLayoutManager(studentAdapter);
 
     }
 
@@ -47,13 +42,14 @@ public class MainActivity extends AppCompatActivity {
 
     }
     private void setAdapter(){
-        StudentAdapter studentAdapter = new StudentAdapter(dummyStudentList());
+        StudentAdapter studentAdapter = new StudentAdapter(db.getAllStudentList());
         rvStudent.setAdapter(studentAdapter);
     }
     private void handleClick(){
         btAdd.setOnClickListener(view -> {
-            Intent i = new Intent(this,AddStudentPage.class);
-            startActivity(i);
+
+            //Intent i = new Intent(this,AddStudentPage.class);
+            //startActivity(i);
 
 
         });
@@ -63,16 +59,5 @@ public class MainActivity extends AppCompatActivity {
 
 
 
-    private ArrayList<String> dummyStudentList(){
-        ArrayList<String> studentList = new ArrayList<>();
-        studentList.add("Tun Tun");
-        studentList.add("Mg Mg");
-        studentList.add("Su Su");
-        studentList.add("Kyaw Kyaw");
-        studentList.add("Susan");
-        studentList.add("Moe Moe");
 
-        return  studentList;
-
-    }
 }
